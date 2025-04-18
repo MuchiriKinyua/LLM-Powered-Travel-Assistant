@@ -1,36 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+1. This pre-screening question seeks to evaluate your ability to: -Work with modern full-stack technologies -Implement AI/LLM integrations -Create user-friendly interfaces -Write clean, maintainable code -Handle API integrations effectively -Assess your decision-making skills 2. Technical Stack Requirements Backend: Python with FastAPI framework Frontend: Next.js (latest version) Styling: TailwindCSS LLM Integration: Choose one from (ChatGPT, DeepSeek, Gemini, or Claude) - Free tier only 3. Choose any use case you like. The sky is the limit. Here is an example use case: When a user inputs: "What documents do I need to travel from Kenya to Ireland?" The application should return a well-formatted response with: -Required visa documentation -Passport requirements -Additional necessary documents -Any relevant travel advisories Respond to this question by outlining your use case and stating the objective
 
-## Getting Started
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+FUNCTIONAL REQUIREMENTS 1. Create a responsive web interface where users can: -Input their questions in a well-designed text area -Receive formatted responses in real-time -View a history of their previous queries (optional bonus) 2. Implement proper API endpoints that: -Handle user queries securely -Integrate with the chosen LLM -Return structured responses TECHNICAL EXPECTATIONS 1. Backend (implementing with FastAPI is preferred): -Proper API structure and error handling / Swagger documentation -Environment variable management -Clean code organization -Basic input validation -Disregard any security measures on your backend. Out of scope -Prompt engineering - how good of an AI instructor are you? -Use this backend to show us you are a Pythonista 2. Frontend (Next.js): -Modern, responsive design -Loading states and error handling -Clean component structure -Effective use of TailwindCSS for styling -Attention to detail is a plus EVALUATION CRITERIA 1. Code Quality (40%): -Clean, well-documented code -Proper error handling -Code organization and structure -API design 2. Technical Implementation (30%): -Successful integration of all required technologies -Performance and responsiveness -Proper use of modern features in Next.js and FastAPI 3. UI/UX Design (30%): -Visual appeal using TailwindCSS -Responsive design -User interaction flow -Loading States TO COMPLETE THE ASSESSMENT SUBMIT THE FOLLOWING: 1. GitHub repository containing: -Complete source code -Documentation of prompts used with the LLM -Setup instructions in README.md -Environment variable template 2. Fully deployed application (optional bonus) Time allocation: 3 days
