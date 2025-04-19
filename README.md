@@ -1,7 +1,6 @@
 # LLM Powered Travel Assistant
 
-![image](https://github.com/user-attachments/assets/07adf9fe-53ee-4f69-92f1-bc1b97629796)
-
+![image](https://github.com/user-attachments/assets/1522ec5e-75e3-4236-9fd4-e11d7f02cb2c)
 
 # Purpose: </br>
 1. Work with modern full-stack technologies -Implement AI/LLM integrations -Create user-friendly interfaces -Write clean, maintainable code -Handle API integrations effectively -Assess your decision-making skills  </br>
