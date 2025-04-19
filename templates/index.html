@@ -16,8 +16,30 @@
     {% if response %}
     <div class="response">
       <h2>Answer:</h2>
-      <p>{{ response|safe }}</p>
+      <p id="short-response">
+        {{ response[:350] }}{% if response|length > 350 %}... <a href="#" id="read-more-link">Read more</a>{% endif %}
+      </p>
+      {% if response|length > 350 %}
+      <p id="full-response" style="display:none;">{{ response|safe }}</p>
+      {% endif %}
     </div>
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const readMoreLink = document.getElementById('read-more-link');
+        const fullResponse = document.getElementById('full-response');
+        const shortResponse = document.getElementById('short-response');
+    
+        if (readMoreLink) {
+          readMoreLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            fullResponse.style.display = 'block';
+            shortResponse.style.display = 'none';
+          });
+        }
+      });
+    </script>
+    
     {% endif %}
   </div>
 </body>
