@@ -84,29 +84,42 @@ function switchTab(tabId, event) {
   event.target.classList.add('active');
 }
   
-    document.addEventListener('DOMContentLoaded', function () {
-      const readMoreLink = document.getElementById('read-more-link');
-      const fullResponse = document.getElementById('full-response');
-      const shortResponse = document.getElementById('short-response');
-  
-      if (readMoreLink) {
-        readMoreLink.addEventListener('click', function (e) {
-          e.preventDefault();
-          fullResponse.style.display = 'block';
-          shortResponse.style.display = 'none';
-        });
+document.addEventListener('DOMContentLoaded', function () {
+  const textarea = document.querySelector('textarea');
+  const form = document.querySelector('form');
+
+  // Prevent Enter from inserting newline and submit the form instead
+  textarea.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault(); // Prevent new line
+      form.submit(); // Trigger form submission
+    }
+  });
+
+  // Read more logic (already there, you can keep this as-is)
+  const readMoreLink = document.getElementById('read-more-link');
+  const fullResponse = document.getElementById('full-response');
+  const shortResponse = document.getElementById('short-response');
+
+  if (readMoreLink) {
+    readMoreLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      fullResponse.style.display = 'block';
+      shortResponse.style.display = 'none';
+    });
+  }
+
+  document.querySelectorAll('.read-more-link').forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('data-target');
+      const fullResponse = document.getElementById(targetId);
+      const short = this.closest('.short-response');
+      if (fullResponse && short) {
+        fullResponse.style.display = 'inline';
+        short.style.display = 'none';
       }
     });
-    document.querySelectorAll('.read-more-link').forEach(link => {
-  link.addEventListener('click', function (e) {
-    e.preventDefault();
-    const targetId = this.getAttribute('data-target');
-    const fullResponse = document.getElementById(targetId);
-    const short = this.closest('.short-response');
-    if (fullResponse && short) {
-      fullResponse.style.display = 'inline';
-      short.style.display = 'none';
-    }
   });
 });
 
