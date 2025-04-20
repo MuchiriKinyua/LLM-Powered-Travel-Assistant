@@ -8,6 +8,8 @@ TravelDoc AI Assistant is a simple web application built with Flask that leverag
 
 This project demonstrates a basic implementation of integrating a large language model into a web application for conversational purposes.
 
+![Screenshot from 2025-04-20 06-17-05](https://github.com/user-attachments/assets/054da8ed-72cb-42b6-b407-8165237bf3c5)
+
 # Features
 
 * **User Interface:** A clean and intuitive web interface built with HTML and CSS.
@@ -23,8 +25,6 @@ This project demonstrates a basic implementation of integrating a large language
 * **Google Generative AI (google-generativeai):** The official Python library for interacting with Google's Gemini models.
 * **python-dotenv:** For loading environment variables from a `.env` file.
 * **gunicorn:** A WSGI HTTP server for deploying Python web applications.
-
-![Screenshot from 2025-04-20 06-17-05](https://github.com/user-attachments/assets/054da8ed-72cb-42b6-b407-8165237bf3c5)
 
 # Installation
 
