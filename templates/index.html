@@ -34,21 +34,33 @@
     </div>
       
 
-<!-- Instead of class="tab-content", just give it an ID -->
-<div id="history-tab" style="display: none;">
-  <h2>History</h2>
-  <div class="history-scroll">
-    {% for item in history %}
-    <div class="history-item">
-      <p><strong>Question:</strong> {{ item.question }}</p>
-      <p><strong>Answer:</strong> {{ item.answer }}</p>
-      <p class="timestamp">📅 {{ item.timestamp }}</p>
+    <div id="history-tab" style="display: none;">
+      <h2>History</h2>
+      <div class="history-scroll">
+        {% for item in history %}
+        <div class="history-item" id="history-{{ loop.index0 }}">
+          <button class="delete-btn" onclick="deleteHistoryItem('{{ loop.index0 }}')">✖</button>
+          <p><strong>❓ Question:</strong><br>{{ item.question }}</p>
+          
+          <p><strong>💬 Answer:</strong><br>
+            <span class="short-response">
+              {{ item.answer[:350] }}{% if item.answer|length > 350 %}... 
+              <a href="#" class="read-more-link" data-target="full-{{ loop.index0 }}">Read more</a>{% endif %}
+            </span>
+            {% if item.answer|length > 350 %}
+            <span id="full-{{ loop.index0 }}" class="full-response" style="display: none;">
+              {{ item.answer }}
+            </span>
+            {% endif %}
+          </p>
+      
+          <p class="timestamp">🕒 {{ item.timestamp }}</p>
+        </div>
+      {% endfor %}
+            
+      </div>
     </div>
-    {% else %}
-    <p>No history yet.</p>
-    {% endfor %}
-  </div>
-</div>
+    
 
   </div>
 
@@ -85,7 +97,42 @@ function switchTab(tabId, event) {
         });
       }
     });
+    document.querySelectorAll('.read-more-link').forEach(link => {
+  link.addEventListener('click', function (e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('data-target');
+    const fullResponse = document.getElementById(targetId);
+    const short = this.closest('.short-response');
+    if (fullResponse && short) {
+      fullResponse.style.display = 'inline';
+      short.style.display = 'none';
+    }
+  });
+});
+
   </script>
+
+<script>
+  function deleteHistoryItem(index) {
+    fetch('/delete_history', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: `index=${index}`
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        const item = document.getElementById(`history-${index}`);
+        if (item) item.remove();
+      } else {
+        alert("Failed to delete history item.");
+      }
+    });
+  }
+  </script>
+  
   
 </body>
 </html>
