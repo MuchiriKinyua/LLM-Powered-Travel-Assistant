@@ -8,39 +8,84 @@
 <body>
   <div class="container">
     <h1>🌍 TravelDoc AI Assistant</h1>
-    <form method="POST" action="/">
-      <textarea name="user_input" placeholder="Ask anything...">{{ user_input or '' }}</textarea>
-      <button type="submit">Ask AI</button>
-    </form>
 
-    {% if response %}
-    <div class="response">
-      <h2>Answer:</h2>
-      <p id="short-response">
-        {{ response[:350] }}{% if response|length > 350 %}... <a href="#" id="read-more-link">Read more</a>{% endif %}
-      </p>
-      {% if response|length > 350 %}
-      <p id="full-response" style="display:none;">{{ response|safe }}</p>
+    <div id="answer-tab" style="display: block;">
+      <form method="POST" action="/">
+        <textarea name="user_input" placeholder="Ask anything...">{{ user_input or '' }}</textarea>
+        <button type="submit">Ask AI</button>
+      </form>
+    
+      <div class="tab-buttons">
+        <button class="tab-button active" onclick="switchTab('answer-tab', event)">Answer</button>
+        <button class="tab-button" onclick="switchTab('history-tab', event)">History</button>
+      </div>
+    
+      {% if response %}
+      <div class="response" id="response-box">
+        <h2>Answer:</h2>
+        <p id="short-response">
+          {{ response[:350] }}{% if response|length > 350 %}... <a href="#" id="read-more-link">Read more</a>{% endif %}
+        </p>
+        {% if response|length > 350 %}
+        <p id="full-response" style="display:none;">{{ response|safe }}</p>
+        {% endif %}
+      </div>
       {% endif %}
     </div>
-    
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        const readMoreLink = document.getElementById('read-more-link');
-        const fullResponse = document.getElementById('full-response');
-        const shortResponse = document.getElementById('short-response');
-    
-        if (readMoreLink) {
-          readMoreLink.addEventListener('click', function (e) {
-            e.preventDefault();
-            fullResponse.style.display = 'block';
-            shortResponse.style.display = 'none';
-          });
-        }
-      });
-    </script>
-    
-    {% endif %}
+      
+
+<!-- Instead of class="tab-content", just give it an ID -->
+<div id="history-tab" style="display: none;">
+  <h2>History</h2>
+  <div class="history-scroll">
+    {% for item in history %}
+    <div class="history-item">
+      <p><strong>Question:</strong> {{ item.question }}</p>
+      <p><strong>Answer:</strong> {{ item.answer }}</p>
+      <p class="timestamp">📅 {{ item.timestamp }}</p>
+    </div>
+    {% else %}
+    <p>No history yet.</p>
+    {% endfor %}
   </div>
+</div>
+
+  </div>
+
+  <script>
+function switchTab(tabId, event) {
+  const responseBox = document.getElementById('response-box');
+  const historyTab = document.getElementById('history-tab');
+  const allButtons = document.querySelectorAll('.tab-button');
+
+  // Hide/show relevant content
+  if (tabId === 'history-tab') {
+    if (responseBox) responseBox.style.display = 'none';
+    historyTab.style.display = 'block';
+  } else {
+    if (responseBox) responseBox.style.display = 'block';
+    historyTab.style.display = 'none';
+  }
+
+  // Update active class on buttons
+  allButtons.forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+}
+  
+    document.addEventListener('DOMContentLoaded', function () {
+      const readMoreLink = document.getElementById('read-more-link');
+      const fullResponse = document.getElementById('full-response');
+      const shortResponse = document.getElementById('short-response');
+  
+      if (readMoreLink) {
+        readMoreLink.addEventListener('click', function (e) {
+          e.preventDefault();
+          fullResponse.style.display = 'block';
+          shortResponse.style.display = 'none';
+        });
+      }
+    });
+  </script>
+  
 </body>
 </html>
